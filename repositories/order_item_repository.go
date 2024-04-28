@@ -21,7 +21,7 @@ type OrderItemRepositoryImp struct {
 }
 
 func NewOrderItemRepository(database *mongo.Database, ctx context.Context) OrderItemRepository {
-	collectionName := constants.COLLECTION_ORDER
+	collectionName := constants.COLLECTION_ORDER_ITEM
 	return &OrderItemRepositoryImp{
 		ctx:            ctx,
 		collection:     database.Collection(collectionName),

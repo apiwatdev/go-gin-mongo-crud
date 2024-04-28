@@ -12,12 +12,14 @@ import (
 
 func InitOrderRoutes(parentRouter *gin.RouterGroup, path string, ctx context.Context) {
 	orderRepository := repositories.NewOrderRepository(bootstraps.GetDatabase(), ctx)
-	orderService := services.NewOrderService(orderRepository)
+	orderItemsRepository := repositories.NewOrderItemRepository(bootstraps.GetDatabase(), ctx)
+	orderService := services.NewOrderService(orderRepository, orderItemsRepository)
 	orderController := controllers.NewOrderController(orderService)
 	orderGroup := parentRouter.Group(path)
 	{
 		orderGroup.GET("", orderController.GetOrders)
 		orderGroup.GET("/:id", orderController.GetOrderById)
+		orderGroup.GET("/with-item/:id", orderController.GetOrderByIdWithItem)
 		orderGroup.POST("", orderController.CreateOrder)
 		orderGroup.PUT("/:id", orderController.UpdateOrder)
 		orderGroup.DELETE("/:id", orderController.DeleteOrder)

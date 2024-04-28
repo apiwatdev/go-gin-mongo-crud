@@ -24,23 +24,6 @@ func main() {
 	}
 	defer bootstraps.GetMongoClient().Disconnect(ctx)
 
-	// orderRepository := repositories.NewOrderRepository(bootstraps.GetDatabase(), ctx)
-	// orderItemRepository := repositories.NewOrderItemRepository(bootstraps.GetDatabase(), ctx)
-
-	// result, err := orderRepository.InsertOne(order)
-	// orderID := result.InsertedID.(primitive.ObjectID)
-
-	// orderItems := []models.OrderItem{
-	// 	{OrderID: orderID, Product: "Product A", Quantity: 2, Price: 20},
-	// 	{OrderID: orderID, Product: "Product B", Quantity: 1, Price: 10},
-	// }
-
-	// _, err = orderItemRepository.InsertMany(orderItems)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// Create a new Gin router
 	router := routers.InitRouter(ctx)
 
 	// Run the HTTP server
